@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Features | EduSphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Exo+2:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --quantum-blue: #00f7ff;
+            --neon-pink: #ff00d4;
+            --matrix-green: #00ff9d;
+            --cyber-purple: #6e44ff;
+            --dark-space: #0a0e17;
+            --cosmic-gray: #1a2035;
+            --gradient: linear-gradient(135deg, var(--quantum-blue), var(--neon-pink));
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-dark: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--dark-space);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(0, 247, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(255, 0, 212, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(0, 255, 157, 0.05) 0%, transparent 20%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cyber Header Styles */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .header-scrolled {
+            padding: 15px 0;
+            background: rgba(10, 14, 23, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 2.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
+        }
+
+        .logo i {
+            margin-right: 12px;
+            color: var(--quantum-blue);
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 5px var(--quantum-blue));
+        }
+
+        /* Quantum Hero Section */
+        .quantum-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 247, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 247, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            perspective: 1000px;
+            z-index: -1;
+        }
+
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--gradient);
+            border-radius: 50%;
+            opacity: 0.7;
+            filter: blur(5px);
+            animation: float-particle 15s infinite linear;
+        }
+
+        .particle-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+            background: linear-gradient(45deg, var(--quantum-blue), transparent);
+        }
+
+        .particle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 10%;
+            animation-delay: 5s;
+            animation-duration: 20s;
+            background: linear-gradient(45deg, var(--neon-pink), transparent);
+        }
+
+        .particle-3 {
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: 20%;
+            animation-delay: 10s;
+            animation-duration: 30s;
+            background: linear-gradient(45deg, var(--matrix-green), transparent);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-pink), var(--matrix-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--quantum-blue);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 300;
+        }
+
+        /* Holographic Features Section */
+        .holographic-features {
+            padding: 150px 0 100px;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 100px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--matrix-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--quantum-blue);
+        }
+
+        .hologram-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 70px;
+            margin-top: 60px;
+            perspective: 1000px;
+        }
+
+        .hologram-card {
+            background: var(--glass);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px var(--glass-dark);
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hologram-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.5s ease;
+        }
+
+        .hologram-card:hover {
+            transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 247, 255, 0.3),
+                0 0 100px rgba(255, 0, 212, 0.2);
+            border-color: var(--quantum-blue);
+        }
+
+        .hologram-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .hologram-icon {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 10px var(--quantum-blue));
+        }
+
+        .hologram-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--quantum-blue);
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .hologram-content p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.8;
+        }
+
+        .hologram-features {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 247, 255, 0.2);
+        }
+
+        .hologram-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .hologram-features i {
+            color: var(--matrix-green);
+            margin-right: 15px;
+            font-size: 1.3rem;
+            filter: drop-shadow(0 0 5px var(--matrix-green));
+        }
+
+        /* Neural Network Animation */
+        .neural-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .neural-line {
+            position: absolute;
+            background: linear-gradient(to right, transparent, var(--quantum-blue), transparent);
+            height: 1px;
+            transform-origin: left center;
+            animation: neural-flow 3s infinite linear;
+            opacity: 0.7;
+        }
+
+        /* Quantum Interface Section */
+        .quantum-interface {
+            padding: 150px 0;
+            background: rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interface-container {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .interface-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .interface-content h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, var(--quantum-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
+        }
+
+        .interface-content p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 50px;
+            font-family: 'Rajdhani', sans-serif;
+            line-height: 1.8;
+        }
+
+        .cyber-button {
+            padding: 18px 40px;
+            border-radius: 50px;
+            background: transparent;
+            color: var(--quantum-blue);
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid var(--quantum-blue);
+            transition: all 0.4s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .cyber-button:hover {
+            color: var(--dark-space);
+            box-shadow: 0 0 25px var(--quantum-blue);
+        }
+
+        .cyber-button:hover::before {
+            left: 0;
+        }
+
+        .interface-visual {
+            flex: 1;
+            min-width: 300px;
+            height: 500px;
+            background: var(--glass);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 247, 255, 0.2);
+        }
+
+        .hexagon-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(120deg, rgba(0, 247, 255, 0.1) 0%, transparent 20%),
+                linear-gradient(240deg, rgba(255, 0, 212, 0.1) 0%, transparent 20%);
+            background-size: 100px 100px;
+            animation: rotate-grid 30s infinite linear;
+        }
+
+        .floating-orb {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: var(--gradient);
+            box-shadow: 0 0 50px var(--quantum-blue);
+            animation: pulse-orb 4s infinite ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        .floating-orb::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--matrix-green);
+            animation: pulse-orb-border 3s infinite ease-in-out;
+            box-shadow: 0 0 30px var(--matrix-green);
+        }
+
+        /* Cyber Stats Section */
+        .cyber-stats {
+            padding: 150px 0;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 50px 30px;
+            background: var(--glass);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(0, 247, 255, 0.2);
+            border-color: var(--quantum-blue);
+        }
+
+        .stat-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 10px var(--quantum-blue));
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 15px rgba(0, 247, 255, 0.5);
+        }
+
+        .stat-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3rem;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        /* Animations */
+        @keyframes float-particle {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+
+            33% {
+                transform: translateY(-30px) rotate(120deg) scale(1.1);
+            }
+
+            66% {
+                transform: translateY(20px) rotate(240deg) scale(0.9);
+            }
+
+            100% {
+                transform: translateY(0) rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes neural-flow {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: scaleX(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rotate-grid {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse-orb {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 50px var(--quantum-blue);
+            }
+
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 80px var(--quantum-blue), 0 0 120px var(--neon-pink);
+            }
+        }
+
+        @keyframes pulse-orb-border {
+
+            0%,
+            100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 4.5rem;
+            }
+
+            .hologram-container {
+                grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .hologram-container {
+                grid-template-columns: 1fr;
+            }
+
+            .interface-container {
+                flex-direction: column;
+            }
+
+            .interface-visual {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .hologram-card {
+                min-height: auto;
+                padding: 30px;
+            }
+
+            .interface-content h2 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .logo i {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .hologram-card {
+                padding: 25px;
+            }
+
+            .hologram-content h3 {
+                font-size: 1.8rem;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+                EduSphere
+            </div>
+            <nav>
+                <ul style="display: flex; list-style: none;">
+                    <li style="margin-left: 35px;"><a href="#"
+                            style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 500;">Home</a>
+                    </li>
+                    <li style="margin-left: 35px;"><a href="#"
+                            style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 500;">Courses</a>
+                    </li>
+                    <li style="margin-left: 35px;"><a href="#"
+                            style="color: var(--quantum-blue); text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 700; text-shadow: 0 0 10px var(--quantum-blue);">Features</a>
+                    </li>
+                    <li style="margin-left: 35px;"><a href="#"
+                            style="color: rgba(255, 255, 255, 0.8); text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 500;">Resources</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="cyber-button" style="padding: 12px 25px; font-size: 1rem;">
+                    <i class="fas fa-terminal"></i> Login
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Quantum Hero Section -->
+    <section class="quantum-hero">
+        <div class="cyber-grid"></div>
+        <div class="floating-particles">
+            <div class="particle particle-1"></div>
+            <div class="particle particle-2"></div>
+            <div class="particle particle-3"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title">QUANTUM LEARNING FEATURES</h1>
+            <p class="hero-subtitle">Experience the next evolution in education with our cutting-edge AI-powered
+                platform</p>
+        </div>
+    </section>
+
+    <!-- Holographic Features Section -->
+    <section class="holographic-features">
+        <div class="neural-network" id="neural-network"></div>
+        <div class="container">
+            <h2 class="section-title">Holographic Tech</h2>
+            <div class="hologram-container">
+                <!-- Feature 1 -->
+                <div class="hologram-card">
+                    <div class="hologram-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="hologram-content">
+                        <h3>Neural Interface</h3>
+                        <p>Direct neural connection to educational content through our proprietary brain-computer
+                            interface technology.</p>
+                    </div>
+                    <ul class="hologram-features">
+                        <li><i class="fas fa-bolt"></i> Real-time knowledge absorption</li>
+                        <li><i class="fas fa-microchip"></i> Adaptive learning algorithms</li>
+                        <li><i class="fas fa-project-diagram"></i> Neural pathway optimization</li>
+                        <li><i class="fas fa-memory"></i> Cognitive load management</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="hologram-card">
+                    <div class="hologram-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <div class="hologram-content">
+                        <h3>Quantum Immersion</h3>
+                        <p>Full sensory immersion in educational environments through our quantum reality technology.
+                        </p>
+                    </div>
+                    <ul class="hologram-features">
+                        <li><i class="fas fa-dice-d20"></i> Photorealistic simulation</li>
+                        <li><i class="fas fa-clock"></i> Time-dilation learning</li>
+                        <li><i class="fas fa-expand"></i> Multi-dimensional classrooms</li>
+                        <li><i class="fas fa-atom"></i> Quantum entanglement tutoring</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="hologram-card">
+                    <div class="hologram-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="hologram-content">
+                        <h3>AI Synapse</h3>
+                        <p>Artificial intelligence that evolves with your learning patterns and anticipates your
+                            educational needs.</p>
+                    </div>
+                    <ul class="hologram-features">
+                        <li><i class="fas fa-shield-alt"></i> Predictive learning paths</li>
+                        <li><i class="fas fa-chart-line"></i> Cognitive performance analytics</li>
+                        <li><i class="fas fa-network-wired"></i> Distributed intelligence network</li>
+                        <li><i class="fas fa-user-graduate"></i> Personalized knowledge delivery</li>
+                    </ul>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="hologram-card">
+                    <div class="hologram-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="hologram-content">
+                        <h3>Blockchain Accreditation</h3>
+                        <p>Immutable educational records stored on a quantum-resistant blockchain network.</p>
+                    </div>
+                    <ul class="hologram-features">
+                        <li><i class="fas fa-lock"></i> Tamper-proof credentials</li>
+                        <li><i class="fas fa-database"></i> Decentralized transcript storage</li>
+                        <li><i class="fas fa-qrcode"></i> Instant verification system</li>
+                        <li><i class="fas fa-shield-alt"></i> Quantum encryption technology</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quantum Interface Section -->
+    <section class="quantum-interface">
+        <div class="container interface-container">
+            <div class="interface-content">
+                <h2>Quantum Learning Interface</h2>
+                <p>Our revolutionary interface uses quantum computing principles to create personalized learning
+                    experiences that adapt in real-time to your cognitive patterns. The system utilizes neural networks
+                    and AI algorithms to optimize knowledge retention and skill acquisition.</p>
+                <button class="cyber-button">
+                    <i class="fas fa-rocket"></i> Experience Demo
+                </button>
+            </div>
+            <div class="interface-visual">
+                <div class="hexagon-grid"></div>
+                <div class="floating-orb"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cyber Stats Section -->
+    <section class="cyber-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="stat-number">97%</div>
+                    <div class="stat-text">Faster Learning</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <div class="stat-number">64x</div>
+                    <div class="stat-text">Knowledge Retention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-astronaut"></i>
+                    </div>
+                    <div class="stat-number">12k</div>
+                    <div class="stat-text">Active Learners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="stat-number">360°</div>
+                    <div class="stat-text">Immersive Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // Create neural network animation
+        const neuralNetwork = document.getElementById('neural-network');
+        const nodes = 15;
+        const lines = 30;
+
+        // Create nodes
+        for (let i = 0; i < nodes; i++) {
+            const node = document.createElement('div');
+            node.style.position = 'absolute';
+            node.style.width = '8px';
+            node.style.height = '8px';
+            node.style.background = 'var(--quantum-blue)';
+            node.style.borderRadius = '50%';
+            node.style.left = Math.random() * 100 + '%';
+            node.style.top = Math.random() * 100 + '%';
+            node.style.boxShadow = '0 0 10px var(--quantum-blue)';
+            neuralNetwork.appendChild(node);
+        }
+
+        // Create connections
+        for (let i = 0; i < lines; i++) {
+            const line = document.createElement('div');
+            line.classList.add('neural-line');
+
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const endX = Math.random() * 100;
+            const endY = Math.random() * 100;
+
+            const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+            const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+
+            line.style.width = length + 'vw';
+            line.style.top = startY + 'vh';
+            line.style.left = startX + 'vw';
+            line.style.transform = rotate(${ angle }deg);
+            line.style.animationDelay = Math.random() * 3 + 's';
+
+            neuralNetwork.appendChild(line);
+        }
+
+        // Hologram card hover effect
+        const hologramCards = document.querySelectorAll('.hologram-card');
+        hologramCards.forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-20px) rotateX(5deg) rotateY(5deg)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            });
+        });
+
+
+        button.addEventListener('mouseleave', function () {
+            this.style.boxShadow = 'none';
+        });
+        });
+
+        // Animate stats
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stat = entry.target;
+                    const target = parseInt(stat.textContent);
+                    let count = 0;
+                    const duration = 2000;
+                    const frameDuration = 1000 / 60;
+                    const totalFrames = Math.round(duration / frameDuration);
+
+                    const counter = setInterval(() => {
+                        const progress = ++count / totalFrames;
+                        const currentCount = Math.round(target * progress);
+
+                        if (parseInt(stat.textContent) !== target) {
+                            stat.textContent = currentCount + (stat.textContent.includes('%') ? '%' :
+                                stat.textContent.includes('x') ? 'x' :
+                                    stat.textContent.includes('°') ? '°' : '');
+                        } else {
+                            clearInterval(counter);
+                        }
+                    }, frameDuration);
+
+                    observer.unobserve(stat);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(stat => {
+            observer.observe(stat);
+        });
+    </script>
+</body>
+
+</html>
